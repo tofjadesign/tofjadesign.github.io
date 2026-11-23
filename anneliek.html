@@ -1135,7 +1135,7 @@ footer {
                 </p>
 
                 <div class="highlight-quote">
-                    <span>En dan sprak ik jou weer en dacht ik:</span>
+                    <span style="color: white;">En dan sprak ik jou weer en dacht ik:</span>
 
                     <strong>
                         "Zie je wel, zij begrijpt me.
@@ -1168,7 +1168,7 @@ footer {
 
             <div class="personality-grid">
 
-                <div class="personality-item reveal">
+                <div class="personality-item">
                     <div class="personality-icon">♡</div>
                     <h3>Menselijkheid</h3>
                     <p>
@@ -1177,7 +1177,7 @@ footer {
                     </p>
                 </div>
 
-                <div class="personality-item reveal">
+                <div class="personality-item">
                     <div class="personality-icon">✳</div>
                     <h3>Eigenzinnigheid</h3>
                     <p>
@@ -1186,7 +1186,7 @@ footer {
                     </p>
                 </div>
 
-                <div class="personality-item reveal">
+                <div class="personality-item">
                     <div class="personality-icon">☀</div>
                     <h3>Oprechte aandacht</h3>
                     <p>
@@ -1574,12 +1574,18 @@ if (!reduceMotion) {
 
 if (!reduceMotion) {
 
-    gsap.from(".personality-item", {
-
+    gsap.set(".personality-item", {
         opacity: 0,
-        y: 50,
+        y: 40
+    });
+
+    gsap.to(".personality-item", {
+
+        opacity: 1,
+        y: 0,
+
         duration: 0.9,
-        stagger: 0.2,
+        stagger: 0.25,
         ease: "power3.out",
 
         scrollTrigger: {
@@ -1588,6 +1594,13 @@ if (!reduceMotion) {
             once: true
         }
 
+    });
+
+} else {
+
+    gsap.set(".personality-item", {
+        opacity: 1,
+        y: 0
     });
 
 }
