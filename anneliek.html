@@ -1,0 +1,1711 @@
+
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f7f1e9">
+
+    <title>Voor Anneliek – Met dankbaarheid</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.14.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.14.2/ScrollTrigger.min.js"></script>
+
+    <style>
+
+/* =====================================================
+   VOOR ANNELIEK
+   Een persoonlijke digitale herinnering
+===================================================== */
+
+:root {
+    --cream: #f7f1e9;
+    --cream-dark: #eee3d7;
+    --white: #fffdf9;
+    --burgundy: #713d4c;
+    --burgundy-dark: #482d39;
+    --rose: #c98f91;
+    --rose-light: #e9c9c3;
+    --gold: #b69a68;
+    --text: #51454a;
+    --muted: #92817e;
+
+    --heading: 'Playfair Display', Georgia, serif;
+    --body: 'DM Sans', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--cream);
+    color: var(--text);
+    font-family: var(--body);
+    overflow-x: hidden;
+}
+
+button {
+    font: inherit;
+}
+
+/* =====================================================
+   PROGRESS BAR
+===================================================== */
+
+.progress-track {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    z-index: 1000;
+    background: transparent;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: var(--rose);
+    transform-origin: left;
+}
+
+/* =====================================================
+   AMBIENT BACKGROUND
+===================================================== */
+
+.ambient {
+    position: fixed;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.13;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.ambient-one {
+    background: #d8a6a0;
+    top: 10%;
+    left: -200px;
+}
+
+.ambient-two {
+    background: #c4a878;
+    top: 55%;
+    right: -220px;
+}
+
+.ambient-three {
+    background: #b98191;
+    bottom: 0;
+    left: 25%;
+}
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero {
+    min-height: 100svh;
+    min-height: 100vh;
+    position: relative;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    padding: 70px 24px;
+    overflow: hidden;
+
+    background:
+        radial-gradient(ellipse at 50% 40%,
+            #fffdf9 0%,
+            #f8eee7 48%,
+            #eadbd2 100%);
+}
+
+.hero::before,
+.hero::after {
+    content: "";
+    position: absolute;
+    border: 1px solid rgba(182, 154, 104, 0.2);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.hero::before {
+    width: 650px;
+    height: 650px;
+}
+
+.hero::after {
+    width: 780px;
+    height: 780px;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+}
+
+.eyebrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    color: var(--gold);
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: 4px;
+    font-weight: 600;
+}
+
+.eyebrow span {
+    width: 30px;
+    height: 1px;
+    background: var(--gold);
+}
+
+.hero-pretitle {
+    margin-top: 55px;
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: var(--muted);
+    text-transform: uppercase;
+}
+
+.hero h1 {
+    margin-top: 15px;
+    font-family: var(--heading);
+    font-size: clamp(3.8rem, 9vw, 7.5rem);
+    font-weight: 400;
+    line-height: 1.05;
+    color: var(--burgundy-dark);
+}
+
+.hero h1 span {
+    display: block;
+    font-style: italic;
+    color: var(--rose);
+}
+
+.hero-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    margin: 35px 0;
+}
+
+.hero-divider span {
+    width: 65px;
+    height: 1px;
+    background: var(--gold);
+    opacity: 0.7;
+}
+
+.hero-divider i {
+    color: var(--rose);
+    font-size: 17px;
+    font-style: normal;
+}
+
+.hero-subtitle {
+    font-family: var(--heading);
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    line-height: 1.8;
+    color: var(--text);
+}
+
+.open-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 25px;
+    margin-top: 48px;
+    padding: 17px 25px;
+    border: 1px solid var(--burgundy);
+    border-radius: 3px;
+    background: var(--burgundy);
+    color: white;
+    cursor: pointer;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: 0.35s ease;
+}
+
+.open-button:hover {
+    background: transparent;
+    color: var(--burgundy);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(113, 61, 76, 0.12);
+}
+
+.button-arrow {
+    font-size: 18px;
+    transition: transform 0.3s;
+}
+
+.open-button:hover .button-arrow {
+    transform: translateY(4px);
+}
+
+.hero-bottom {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -100px;
+    white-space: nowrap;
+    color: var(--muted);
+    font-size: 9px;
+    letter-spacing: 3px;
+}
+
+.hero-decoration {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.hero-star {
+    position: absolute;
+    color: var(--gold);
+    opacity: 0.5;
+}
+
+.star-one {
+    top: 20%;
+    left: 16%;
+    font-size: 30px;
+}
+
+.star-two {
+    top: 28%;
+    right: 18%;
+    font-size: 40px;
+}
+
+.star-three {
+    bottom: 20%;
+    left: 20%;
+    font-size: 20px;
+}
+
+.star-four {
+    bottom: 24%;
+    right: 15%;
+    font-size: 30px;
+}
+
+/* =====================================================
+   GENERAL SECTIONS
+===================================================== */
+
+.section-padding {
+    padding: 130px 24px;
+}
+
+.section-inner {
+    max-width: 1050px;
+    margin: 0 auto;
+}
+
+.chapter-label {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 55px;
+    color: var(--muted);
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.chapter-label span:first-child {
+    color: var(--rose);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.chapter-label span:last-child::before {
+    content: "";
+    display: inline-block;
+    width: 35px;
+    height: 1px;
+    background: var(--gold);
+    vertical-align: middle;
+    margin-right: 15px;
+}
+
+/* =====================================================
+   INTRO CARD
+===================================================== */
+
+.intro {
+    background: var(--white);
+}
+
+.intro-card {
+    max-width: 850px;
+    margin: auto;
+    padding: 80px 10%;
+    background: var(--cream);
+    text-align: center;
+    position: relative;
+    border: 1px solid rgba(182, 154, 104, 0.25);
+}
+
+.big-quote {
+    display: block;
+    font-family: var(--heading);
+    color: var(--rose);
+    font-size: 100px;
+    height: 65px;
+    line-height: 1;
+}
+
+.intro-card h2 {
+    font-family: var(--heading);
+    font-size: clamp(1.7rem, 4vw, 2.8rem);
+    line-height: 1.45;
+    font-weight: 400;
+    color: var(--burgundy-dark);
+}
+
+.small-line {
+    width: 45px;
+    height: 2px;
+    background: var(--gold);
+    margin: 30px auto;
+}
+
+.intro-card p {
+    max-width: 570px;
+    margin: auto;
+    font-size: 15px;
+    line-height: 2;
+    color: var(--muted);
+}
+
+.card-flower {
+    position: absolute;
+    bottom: 25px;
+    right: 30px;
+    color: var(--rose);
+    font-size: 25px;
+    opacity: 0.6;
+}
+
+/* =====================================================
+   TWO COLUMN CHAPTERS
+===================================================== */
+
+.two-column {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 100px;
+    align-items: center;
+}
+
+.chapter-number {
+    display: block;
+    color: var(--rose);
+    font-size: 14px;
+    letter-spacing: 2px;
+    margin-bottom: 25px;
+}
+
+.chapter-kicker {
+    color: var(--gold);
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+}
+
+.chapter-heading h2,
+.personality-header h2,
+.little-things h2 {
+    font-family: var(--heading);
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    line-height: 1.25;
+    font-weight: 400;
+    color: var(--burgundy-dark);
+}
+
+.chapter-heading h2 em,
+.personality-header h2 em,
+.final-title em {
+    color: var(--rose);
+    font-weight: 400;
+}
+
+.chapter-heading .small-line {
+    margin: 30px 0;
+}
+
+.chapter-text p {
+    font-size: 15px;
+    line-height: 2.1;
+    margin-bottom: 25px;
+    color: var(--text);
+}
+
+.highlight-quote {
+    margin-top: 35px;
+    padding: 30px;
+    border-left: 2px solid var(--rose);
+    background: rgba(255, 255, 255, 0.5);
+    font-family: var(--heading);
+    font-size: 22px;
+    font-style: italic;
+    line-height: 1.6;
+    color: var(--burgundy);
+}
+
+.highlight-quote span {
+    display: block;
+    margin-bottom: 12px;
+    font-family: var(--body);
+    font-size: 12px;
+    font-style: normal;
+    color: var(--muted);
+}
+
+.highlight-quote strong {
+    font-weight: 400;
+}
+
+/* =====================================================
+   PERSONALITY
+===================================================== */
+
+.personality {
+    background: #eee2dc;
+}
+
+.personality-header {
+    margin-bottom: 65px;
+}
+
+.personality-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.personality-item {
+    padding: 40px 30px;
+    background: var(--white);
+    text-align: center;
+    border: 1px solid rgba(182, 154, 104, 0.15);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.personality-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(72, 45, 57, 0.08);
+}
+
+.personality-icon {
+    font-size: 35px;
+    color: var(--rose);
+    margin-bottom: 25px;
+}
+
+.personality-item h3 {
+    font-family: var(--heading);
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--burgundy);
+    margin-bottom: 15px;
+}
+
+.personality-item p {
+    font-size: 13px;
+    line-height: 1.9;
+    color: var(--muted);
+}
+
+.personality-footer {
+    text-align: center;
+    margin-top: 60px;
+    font-family: var(--heading);
+    font-size: 22px;
+    font-style: italic;
+    color: var(--burgundy);
+}
+
+/* =====================================================
+   LITTLE THINGS
+===================================================== */
+
+.little-things {
+    padding: 120px 24px;
+    background: var(--white);
+}
+
+.little-things-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    column-gap: 80px;
+}
+
+.little-things .chapter-label {
+    grid-column: 1 / -1;
+}
+
+.food-illustration {
+    display: grid;
+    place-items: center;
+    min-height: 300px;
+}
+
+.food-circle {
+    display: grid;
+    place-items: center;
+    width: 210px;
+    height: 210px;
+    border-radius: 50%;
+    border: 1px solid var(--rose-light);
+    background: var(--cream);
+    box-shadow:
+        0 0 0 15px rgba(233, 201, 195, 0.15),
+        0 0 0 35px rgba(233, 201, 195, 0.08);
+}
+
+.food-circle span {
+    font-size: 75px;
+    color: var(--rose);
+}
+
+.little-things-text h2 {
+    font-size: 2.6rem;
+}
+
+.food-highlight {
+    font-family: var(--heading);
+    font-size: 35px;
+    font-style: italic;
+    color: var(--rose);
+    margin: 10px 0 25px;
+}
+
+.little-things-text p {
+    font-size: 15px;
+    line-height: 2;
+    margin-bottom: 20px;
+}
+
+.small-note {
+    color: var(--muted);
+    font-style: italic;
+}
+
+/* =====================================================
+   GOODBYE
+===================================================== */
+
+.goodbye {
+    background: #f1e9e1;
+}
+
+/* =====================================================
+   WISHES
+===================================================== */
+
+.wishes {
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    background:
+        radial-gradient(circle at center,
+            #fffdf9 0%,
+            #f4e7df 70%,
+            #edddd6 100%);
+}
+
+.wishes-content {
+    max-width: 700px;
+    margin: auto;
+}
+
+.wishes-star {
+    display: block;
+    color: var(--gold);
+    font-size: 50px;
+    margin-bottom: 30px;
+}
+
+.wishes h2 {
+    font-family: var(--heading);
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 400;
+    color: var(--burgundy-dark);
+    margin-bottom: 25px;
+}
+
+.wishes-content > p:not(.chapter-kicker) {
+    font-size: 16px;
+    line-height: 2;
+}
+
+.wishes-final {
+    max-width: 540px;
+    margin: 0 auto 25px;
+    color: var(--muted);
+}
+
+.wishes .deserved {
+    font-family: var(--heading);
+    font-size: 25px !important;
+    font-style: italic;
+    color: var(--rose);
+}
+
+/* =====================================================
+   FINAL
+===================================================== */
+
+.final-section {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 110px 25px 60px;
+    overflow: hidden;
+    color: var(--white);
+
+    background:
+        radial-gradient(ellipse at 50% 40%,
+            #80505b 0%,
+            #603c49 55%,
+            #402c37 100%);
+}
+
+.final-section::before,
+.final-section::after {
+    content: "";
+    position: absolute;
+    border: 1px solid rgba(233, 201, 195, 0.15);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.final-section::before {
+    width: 600px;
+    height: 600px;
+}
+
+.final-section::after {
+    width: 800px;
+    height: 800px;
+}
+
+.final-content {
+    position: relative;
+    z-index: 2;
+    max-width: 720px;
+}
+
+.final-kicker {
+    color: var(--rose-light);
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-size: 11px;
+    margin-bottom: 30px;
+}
+
+.final-title {
+    font-family: var(--heading);
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    line-height: 1.2;
+    font-weight: 400;
+    color: var(--white);
+}
+
+.final-title em {
+    color: var(--rose-light);
+}
+
+.final-heart {
+    margin: 35px 0;
+    color: var(--rose-light);
+    font-size: 30px;
+}
+
+.final-message {
+    max-width: 570px;
+    margin: auto;
+    font-size: 14px;
+    line-height: 2.1;
+    color: rgba(255, 253, 249, 0.8);
+}
+
+.final-divider {
+    width: 55px;
+    height: 1px;
+    background: var(--gold);
+    margin: 45px auto;
+}
+
+.never-forget {
+    font-family: var(--heading);
+    font-size: clamp(1.7rem, 4vw, 2.5rem);
+    line-height: 1.5;
+}
+
+.never-forget span {
+    color: var(--rose-light);
+    font-style: italic;
+}
+
+.final-goodbye {
+    margin-top: 35px;
+    font-family: var(--heading);
+    font-size: 23px;
+    font-style: italic;
+    color: var(--rose-light);
+}
+
+.final-signature {
+    margin-top: 60px;
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: rgba(255, 253, 249, 0.65);
+}
+
+.final-decoration {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.final-decoration span {
+    position: absolute;
+    color: var(--rose-light);
+    opacity: 0.3;
+}
+
+.final-decoration span:nth-child(1) {
+    top: 15%;
+    left: 15%;
+    font-size: 35px;
+}
+
+.final-decoration span:nth-child(2) {
+    top: 30%;
+    right: 15%;
+    font-size: 45px;
+}
+
+.final-decoration span:nth-child(3) {
+    bottom: 20%;
+    left: 20%;
+    font-size: 30px;
+}
+
+footer {
+    position: absolute;
+    bottom: 25px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: rgba(255, 253, 249, 0.4);
+}
+
+/* =====================================================
+   ANIMATION DEFAULTS
+===================================================== */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(35px);
+}
+
+.hero-content > * {
+    opacity: 0;
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 750px) {
+
+    .section-padding {
+        padding: 85px 22px;
+    }
+
+    .hero::before {
+        width: 400px;
+        height: 400px;
+    }
+
+    .hero::after {
+        width: 480px;
+        height: 480px;
+    }
+
+    .hero-pretitle {
+        margin-top: 35px;
+    }
+
+    .hero-bottom {
+        bottom: -70px;
+    }
+
+    .two-column {
+        grid-template-columns: 1fr;
+        gap: 35px;
+    }
+
+    .chapter-heading h2 {
+        font-size: 2.8rem;
+    }
+
+    .personality-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .personality-item {
+        padding: 30px 25px;
+    }
+
+    .personality-header {
+        margin-bottom: 40px;
+    }
+
+    .little-things-inner {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .little-things .chapter-label {
+        grid-column: auto;
+    }
+
+    .food-illustration {
+        min-height: 240px;
+    }
+
+    .food-circle {
+        width: 160px;
+        height: 160px;
+    }
+
+    .food-circle span {
+        font-size: 60px;
+    }
+
+    .final-section {
+        min-height: 100svh;
+        padding-top: 90px;
+        padding-bottom: 80px;
+    }
+
+    .final-decoration span:nth-child(1) {
+        left: 5%;
+    }
+
+    .final-decoration span:nth-child(2) {
+        right: 5%;
+    }
+
+    .final-decoration span:nth-child(3) {
+        left: 7%;
+    }
+
+}
+
+@media (max-width: 400px) {
+
+    .eyebrow {
+        font-size: 8px;
+        letter-spacing: 2px;
+    }
+
+    .hero h1 {
+        font-size: 3.6rem;
+    }
+
+    .intro-card {
+        padding: 65px 25px;
+    }
+
+    .highlight-quote {
+        padding: 22px;
+        font-size: 19px;
+    }
+
+}
+
+/* =====================================================
+   REDUCED MOTION
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+    </style>
+</head>
+
+<body>
+
+
+
+
+ 
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f7f1e9">
+
+    <title>Voor Anneliek – Met dankbaarheid</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.14.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.14.2/ScrollTrigger.min.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Progress -->
+    <div class="progress-track">
+        <div class="progress-bar"></div>
+    </div>
+
+    <!-- Floating background elements -->
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+    <div class="ambient ambient-three"></div>
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+
+        <div class="hero-decoration">
+            <span class="hero-star star-one">✳</span>
+            <span class="hero-star star-two">✧</span>
+            <span class="hero-star star-three">✳</span>
+            <span class="hero-star star-four">✧</span>
+        </div>
+
+        <div class="hero-content">
+
+            <div class="eyebrow hero-eyebrow">
+                <span></span>
+                Een persoonlijke boodschap
+                <span></span>
+            </div>
+
+            <p class="hero-pretitle">Voor iemand die bijzonder is</p>
+
+            <h1>
+                Lieve
+                <span>Anneliek</span>
+            </h1>
+
+            <div class="hero-divider">
+                <span></span>
+                <i>♥</i>
+                <span></span>
+            </div>
+
+            <p class="hero-subtitle">
+                Sommige mensen komen op je pad<br>
+                en laten een blijvende indruk achter.
+            </p>
+
+            <button class="open-button" id="startButton">
+                <span>Open deze herinnering</span>
+                <span class="button-arrow">↓</span>
+            </button>
+
+            <div class="hero-bottom">
+                <span>MET VEEL WARMTE GESCHREVEN</span>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- INTRO -->
+    <section class="intro section-padding" id="intro">
+
+        <div class="section-inner">
+
+            <div class="chapter-label reveal">
+                <span>01</span>
+                <span>Een bijzondere ontmoeting</span>
+            </div>
+
+            <div class="intro-card reveal">
+
+                <span class="big-quote">“</span>
+
+                <h2>
+                    De eerste keer dat wij elkaar ontmoetten,
+                    hadden we eigenlijk meteen een klik.
+                </h2>
+
+                <div class="small-line"></div>
+
+                <p>
+                    Je was grappig, recht voor z'n raap en iemand
+                    die mij het licht aan het einde van de tunnel
+                    liet zien.
+                </p>
+
+                <span class="card-flower">✳</span>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- CHAPTER 2 -->
+    <section class="chapter section-padding">
+
+        <div class="section-inner two-column">
+
+            <div class="chapter-heading reveal">
+                <span class="chapter-number">02</span>
+
+                <p class="chapter-kicker">Wat jou bijzonder maakt</p>
+
+                <h2>
+                    Wij spreken<br>
+                    dezelfde <em>taal.</em>
+                </h2>
+
+                <div class="small-line"></div>
+            </div>
+
+            <div class="chapter-text reveal">
+
+                <p>
+                    Je bent begripvol, empathisch en bovenal
+                    een echt mensenmens. Mensen zoals jij worden
+                    steeds zeldzamer.
+                </p>
+
+                <p>
+                    Er lijkt steeds meer afstand en formaliteit
+                    te komen in de manier waarop mensen met elkaar
+                    omgaan. Soms heb ik het gevoel dat mensen
+                    een andere taal spreken dan ik.
+                </p>
+
+                <div class="highlight-quote">
+                    <span>En dan sprak ik jou weer en dacht ik:</span>
+
+                    <strong>
+                        "Zie je wel, zij begrijpt me.
+                        Wij spreken dezelfde taal."
+                    </strong>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- CHAPTER 3 -->
+    <section class="chapter personality section-padding">
+
+        <div class="section-inner">
+
+            <div class="chapter-label reveal">
+                <span>03</span>
+                <span>Jij, zoals je bent</span>
+            </div>
+
+            <div class="personality-header reveal">
+                <h2>
+                    Juist jouw <em>eigenheid</em><br>
+                    maakt je zo bijzonder.
+                </h2>
+            </div>
+
+            <div class="personality-grid">
+
+                <div class="personality-item reveal">
+                    <div class="personality-icon">♡</div>
+                    <h3>Menselijkheid</h3>
+                    <p>
+                        Je durft jezelf kwetsbaar op te stellen
+                        en bent altijd open en eerlijk geweest.
+                    </p>
+                </div>
+
+                <div class="personality-item reveal">
+                    <div class="personality-icon">✳</div>
+                    <h3>Eigenzinnigheid</h3>
+                    <p>
+                        Je humor, je eigen stijl en natuurlijk
+                        die heerlijke felle kleuren.
+                    </p>
+                </div>
+
+                <div class="personality-item reveal">
+                    <div class="personality-icon">☀</div>
+                    <h3>Oprechte aandacht</h3>
+                    <p>
+                        Je liet mij altijd in mijn waarde en
+                        gaf me het gevoel dat ik gewoon mezelf
+                        kon zijn.
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="personality-footer reveal">
+                Het zijn juist de kleine dingen die iemand bijzonder maken.
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- CHAPTER 4 -->
+    <section class="little-things section-padding">
+
+        <div class="section-inner little-things-inner">
+
+            <div class="chapter-label reveal">
+                <span>04</span>
+                <span>De kleine dingen</span>
+            </div>
+
+            <div class="food-illustration reveal">
+                <div class="food-circle">
+                    <span>♥</span>
+                </div>
+            </div>
+
+            <div class="little-things-text reveal">
+
+                <h2>
+                    En dan natuurlijk...
+                </h2>
+
+                <p class="food-highlight">
+                    Het lekkere eten!
+                </p>
+
+                <p>
+                    Dat je af en toe wat lekkers meenam.
+                    Dat doet echt niet iedereen!
+                </p>
+
+                <p class="small-note">
+                    Het zijn misschien kleine dingen, maar juist
+                    dat soort dingen maken iemand bijzonder.
+                </p>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- CHAPTER 5 -->
+    <section class="chapter goodbye section-padding">
+
+        <div class="section-inner two-column">
+
+            <div class="chapter-heading reveal">
+                <span class="chapter-number">05</span>
+
+                <p class="chapter-kicker">Een nieuw hoofdstuk</p>
+
+                <h2>
+                    Met begrip,<br>
+                    maar ook met<br>
+                    een beetje <em>verdriet.</em>
+                </h2>
+
+                <div class="small-line"></div>
+            </div>
+
+            <div class="chapter-text reveal">
+
+                <p>
+                    Ik vind het oprecht verdrietig dat er nu een
+                    einde komt aan onze gesprekken en bezoeken.
+                    We hebben toch ruim een jaar een heel fijn
+                    contact gehad.
+                </p>
+
+                <p>
+                    Maar tegelijkertijd begrijp ik dat je ook
+                    aan jezelf en je eigen gezondheid moet denken.
+                </p>
+
+                <p>
+                    Je doet dit werk inmiddels bijna veertig jaar
+                    en wanneer je zoveel om mensen geeft, zullen
+                    sommige dingen je ongetwijfeld niet in de
+                    koude kleren gaan zitten.
+                </p>
+
+                <div class="highlight-quote">
+                    Juist dat zegt ook iets over jou als mens.
+                    Je bent een goed mens, met een groot hart.
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- CHAPTER 6 -->
+    <section class="wishes section-padding">
+
+        <div class="section-inner">
+
+            <div class="wishes-content reveal">
+
+                <span class="wishes-star">✧</span>
+
+                <p class="chapter-kicker">Nu is het jouw tijd</p>
+
+                <h2>
+                    Geniet van het leven.
+                </h2>
+
+                <p>
+                    Samen met je mannetje, je dochter,
+                    vrienden en familie.
+                </p>
+
+                <div class="small-line"></div>
+
+                <p class="wishes-final">
+                    Ik hoop dat er nog heel veel mooie jaren
+                    op je wachten, vol plezier, geluk en
+                    mooie momenten.
+                </p>
+
+                <p class="deserved">
+                    Het is je ontzettend gegund.
+                </p>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- FINAL -->
+    <section class="final-section" id="final">
+
+        <div class="final-decoration">
+            <span>✧</span>
+            <span>✳</span>
+            <span>✧</span>
+        </div>
+
+        <div class="final-content">
+
+            <p class="final-kicker reveal">
+                Lieve Anneliek
+            </p>
+
+            <h2 class="final-title reveal">
+                Dank je wel<br>
+                voor wie je <em>bent.</em>
+            </h2>
+
+            <div class="final-heart reveal">
+                ♥
+            </div>
+
+            <p class="final-message reveal">
+                Ik wil je bedanken voor alles wat je voor mij
+                hebt gedaan. Voor je steun, je begrip, je
+                eerlijkheid, de fijne gesprekken en vooral
+                voor wie je bent als mens.
+            </p>
+
+            <div class="final-divider reveal"></div>
+
+            <p class="never-forget reveal">
+                Ik zal je in ieder geval<br>
+                <span>nooit vergeten.</span>
+            </p>
+
+            <p class="final-goodbye reveal">
+                Het ga je ontzettend goed!
+            </p>
+
+            <div class="final-signature reveal">
+                Met veel warmte ❤️
+            </div>
+
+        </div>
+
+        <footer>
+            <span>MET DANKBAARHEID GESCHREVEN</span>
+            <span>♥ MARCEL CORNELLO</span>
+        </footer>
+
+    </section>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
+
+
+
+    <script>
+
+/* =====================================================
+   VOOR ANNELIEK
+   GSAP ANIMATIONS
+===================================================== */
+
+gsap.registerPlugin(ScrollTrigger);
+
+const reduceMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+).matches;
+
+
+/* =====================================================
+   HERO INTRO
+===================================================== */
+
+if (!reduceMotion) {
+
+    const heroTimeline = gsap.timeline({
+        defaults: {
+            ease: "power3.out"
+        }
+    });
+
+    heroTimeline
+        .fromTo(".hero-eyebrow",
+            { y: 20, opacity: 0 },
+            { y: 0, opacity: 1, duration: 1 }
+        )
+        .fromTo(".hero-pretitle",
+            { y: 20, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.8 },
+            "-=0.5"
+        )
+        .fromTo(".hero h1",
+            { y: 45, opacity: 0 },
+            { y: 0, opacity: 1, duration: 1.2 },
+            "-=0.4"
+        )
+        .fromTo(".hero-divider",
+            { scaleX: 0, opacity: 0 },
+            { scaleX: 1, opacity: 1, duration: 1 },
+            "-=0.6"
+        )
+        .fromTo(".hero-subtitle",
+            { y: 20, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.9 },
+            "-=0.5"
+        )
+        .fromTo(".open-button",
+            { y: 20, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.8 },
+            "-=0.4"
+        )
+        .fromTo(".hero-bottom",
+            { opacity: 0 },
+            { opacity: 1, duration: 1 },
+            "-=0.2"
+        );
+
+    // Decorative stars
+    gsap.to(".hero-star", {
+        y: -15,
+        rotation: 15,
+        duration: 3,
+        ease: "sine.inOut",
+        stagger: 0.5,
+        repeat: -1,
+        yoyo: true
+    });
+
+} else {
+
+    gsap.set(".hero-content > *", {
+        opacity: 1
+    });
+
+}
+
+
+
+/* =====================================================
+   START BUTTON
+===================================================== */
+
+const startButton = document.querySelector("#startButton");
+
+if (startButton) {
+
+    startButton.addEventListener("click", () => {
+
+        const intro = document.querySelector("#intro");
+
+        if (intro) {
+            intro.scrollIntoView({
+                behavior: reduceMotion ? "auto" : "smooth",
+                block: "start"
+            });
+        }
+
+    });
+
+}
+
+
+/* =====================================================
+   SCROLL REVEALS
+===================================================== */
+
+if (!reduceMotion) {
+
+    gsap.utils.toArray(".reveal").forEach((element) => {
+
+        gsap.to(element, {
+            opacity: 1,
+            y: 0,
+            duration: 1.1,
+            ease: "power3.out",
+
+            scrollTrigger: {
+                trigger: element,
+                start: "top 85%",
+                toggleActions: "play none none none"
+            }
+        });
+
+    });
+
+} else {
+
+    gsap.set(".reveal", {
+        opacity: 1,
+        y: 0
+    });
+
+}
+
+
+/* =====================================================
+   CHAPTER HEADINGS
+===================================================== */
+
+if (!reduceMotion) {
+
+    gsap.utils.toArray(".chapter-heading").forEach((heading) => {
+
+        gsap.from(heading.querySelector("h2"), {
+
+            opacity: 0,
+            x: -40,
+            duration: 1.2,
+            ease: "power3.out",
+
+            scrollTrigger: {
+                trigger: heading,
+                start: "top 80%",
+                once: true
+            }
+
+        });
+
+    });
+
+}
+
+
+/* =====================================================
+   PERSONALITY CARDS
+===================================================== */
+
+if (!reduceMotion) {
+
+    gsap.from(".personality-item", {
+
+        opacity: 0,
+        y: 50,
+        duration: 0.9,
+        stagger: 0.2,
+        ease: "power3.out",
+
+        scrollTrigger: {
+            trigger: ".personality-grid",
+            start: "top 80%",
+            once: true
+        }
+
+    });
+
+}
+
+
+/* =====================================================
+   FOOD ILLUSTRATION
+===================================================== */
+
+if (!reduceMotion) {
+
+    gsap.from(".food-circle", {
+
+        scale: 0.5,
+        rotation: -25,
+        opacity: 0,
+        duration: 1.3,
+        ease: "back.out(1.7)",
+
+        scrollTrigger: {
+            trigger: ".food-illustration",
+            start: "top 80%",
+            once: true
+        }
+
+    });
+
+}
+
+
+/* =====================================================
+   WISHES
+===================================================== */
+
+if (!reduceMotion) {
+
+    gsap.from(".wishes-star", {
+
+        scale: 0,
+        rotation: 180,
+        duration: 1.2,
+        ease: "back.out(2)",
+
+        scrollTrigger: {
+            trigger: ".wishes",
+            start: "top 75%",
+            once: true
+        }
+
+    });
+
+}
+
+
+/* =====================================================
+   FINAL SECTION
+===================================================== */
+
+if (!reduceMotion) {
+
+    gsap.from(".final-heart", {
+
+        scale: 0,
+        rotation: -45,
+        duration: 1.3,
+        ease: "elastic.out(1, 0.5)",
+
+        scrollTrigger: {
+            trigger: ".final-section",
+            start: "top 70%",
+            once: true
+        }
+
+    });
+
+}
+
+
+/* =====================================================
+   SCROLL PROGRESS
+===================================================== */
+
+gsap.to(".progress-bar", {
+
+    width: "100%",
+    ease: "none",
+
+    scrollTrigger: {
+        trigger: document.body,
+        start: "top top",
+        end: "bottom bottom",
+        scrub: 0.3
+    }
+
+});
+
+
+/* =====================================================
+   SUBTLE FINAL BACKGROUND
+===================================================== */
+
+if (!reduceMotion) {
+
+    gsap.to(".final-decoration span", {
+
+        y: -20,
+        rotation: 20,
+        duration: 4,
+        stagger: 0.8,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut"
+
+    });
+
+}
+
+    </script>
+
+</body>
+</html>
